@@ -28,13 +28,36 @@ def home():
 @app.route("/search",methods=['POST'])
 def search_results():
     keywords = request.form['keywords']
-    now = datetime.datetime.now()
-    results = mc.sentenceCount(keywords,
-        solr_filter=[mc.publish_date_query( datetime.date( 2015, 1, 1), 
-                                            datetime.date( now.year, now.month, now.day) ),
-                     'media_sets_id:1' ])
+    
+    startyear = request.form['startyear']
+    startyear = int(startyear)
+    startmonth = request.form['startmonth']
+    startmonth = int(startmonth)
+    startday = request.form['startday']
+    startday = int(startday)
+    
+    endyear = request.form['endyear']
+    endyear = int(endyear)
+    endmonth = request.form['endmonth']
+    endmonth = int(endmonth)
+    endday = request.form['endday']
+    endday = int(endday)
+    
+    results = mc.sentenceCount(keywords, 
+        solr_filter=[mc.publish_date_query( datetime.date( startyear, startmonth, startday), 
+                                            datetime.date( endyear, endmonth, endday) ),
+                     'media_sets_id:1' ] )              
+
+    chartresults = mc.sentenceCount(keywords, 
+        solr_filter=[mc.publish_date_query( datetime.date( startyear, startmonth, startday), 
+                                            datetime.date( endyear, endmonth, endday) ),
+                     'media_sets_id:1' ], split = 1)
+
+    chartresultsarray = chartresults.items()
+                            
+                     
     return render_template("search-results.html", 
-        keywords=keywords, sentenceCount=results['count'] )
+        keywords=keywords, sentenceCount=results['count'], chartresultsarray=chartresultsarray )
 
 if __name__ == "__main__":
     app.debug = True

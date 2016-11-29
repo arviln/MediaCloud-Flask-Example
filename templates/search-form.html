@@ -11,9 +11,23 @@
     <h3>Try a Search!</h3>
     <form action="search" method="POST">
       <div class="form-group">
-        <label for="keywords">Enter some keywords</label>
+        <label for="keywords">Enter some keywords</label><br>
         <input type="text" class="form-control" id="keywords" name="keywords" placeholder="puppy">
-      </div>
+        <label for="startyear">Enter a start year</label>
+        <input type="number" class="form-control" id="startyear" name="startyear" placeholder="YYYY">
+        <label for="startmonth">Enter a start month</label>
+        <input type="number" class="form-control" id="startmonth" name="startmonth" placeholder="MM">      
+        <label for="startday">Enter a start day</label>
+        <input type="number" class="form-control" id="startday" name="startday" placeholder="DD">        
+        
+        <label for="endyear">Enter an end year</label>
+        <input type="number" class="form-control" id="endyear" name="endyear" placeholder="YYYY">
+        <label for="endmonth">Enter an end month</label>
+        <input type="number" class="form-control" id="endmonth" name="endmonth" placeholder="MM">      
+        <label for="endday">Enter an end day</label>
+        <input type="number" class="form-control" id="endday" name="endday" placeholder="DD">   
+    </div>
+
       <button type="submit" class="btn btn-default">Search</button>
     </form>
   
